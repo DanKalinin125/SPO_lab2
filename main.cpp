@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     numbers.push_back(rawInput);
   }
 
+
   for (size_t i = 0; i < numbers.size(); i++){
     cout << numbers[i] << endl;
   }
