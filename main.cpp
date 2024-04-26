@@ -16,10 +16,10 @@ int main(int argc, char* argv[]) {
   string rawInput;
   vector<string> numbers;
   while (getline(cin, rawInput, ' ')){
-    numbers.push_back(rawInput);
-     if (cin.peek() == '\n') {
+    if (rawInput == "\n") {
         break;
     }
+    numbers.push_back(rawInput);
   }
 
 
