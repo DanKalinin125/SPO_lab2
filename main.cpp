@@ -5,6 +5,12 @@
 
 using namespace std;
 
+
+// На вход подается
+// 1. Флаг -debug (в argv)
+// 2. Число потоков consumer
+// 3. Максимальное время сна для consumer
+// 4. Строка чисел через пробел для producer
 int main(int argc, char* argv[]) {
 
   // Определяем наличие флага -debug
@@ -13,9 +19,19 @@ int main(int argc, char* argv[]) {
     if (string(argv[i]) == "-debug") debug_flag = true;
   }
 
-  // Считываем числа
-  string input_string;
+  // Число потоков consumer (N)
+  int n;
+  cout << "Введите число потоков consumer (N): ";
+  cin >> n;
+
+  // Максимальное время сна для consumer
+  int max_sleep_time;
+  cout << "Введите максимальное время сна для consumer: ";
+  cin >> max_sleep_time;
+
+  // Список чисел
   vector<int> numbers;
+  string input_string;
   
   getline(cin, input_string);
   stringstream raw_string_stream(input_string);
@@ -25,13 +41,11 @@ int main(int argc, char* argv[]) {
     numbers.push_back(stoi(token));
   }
 
-  // Считаем количество чисел (N)
-  size_t n = numbers.size();
 
   // Выводим полученные данные
   // cout << "Debug: " << debug_flag << endl;
   // cout << "N: " << n << endl;
-
+  // cout << "Max_sleep_time: " << max_sleep_time << endl;
   // cout << "Numbers: ";
   // for (size_t i = 0; i < numbers.size(); i++){
   //   cout << numbers[i] << " ";
@@ -39,6 +53,6 @@ int main(int argc, char* argv[]) {
   // cout << endl;
 
   // Запускаем основную часть программы
-  cout << run_threads(n, numbers, debug_flag) << endl;
+  cout << run_threads(n, max_sleep_time, numbers, debug_flag) << endl;
   return 0;
 }

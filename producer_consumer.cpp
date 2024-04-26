@@ -30,13 +30,13 @@ void* consumer_interruptor_routine(void* arg) {
 }
 
 // the declaration of run threads can be changed as you like
-int run_threads(size_t n, vector<int> numbers, bool debug_flag) {
+int run_threads(int n, int max_sleep_time, vector<int> numbers, bool debug_flag) {
   // start N threads and wait until they're done
   // return aggregated sum of values
 
   cout << "Debug: " << debug_flag << endl;
   cout << "N: " << n << endl;
-
+  cout << "Max_sleep_time: " << max_sleep_time << endl;
   cout << "Numbers: ";
   for (size_t i = 0; i < numbers.size(); i++){
     cout << numbers[i] << " ";
