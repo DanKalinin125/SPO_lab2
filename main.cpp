@@ -32,10 +32,10 @@ int main(int argc, char* argv[]) {
   // Список чисел
   vector<int> numbers;
   string input_string;
-  
+  cout << "Введите числа через пробел: ";
   getline(cin, input_string);
-  stringstream raw_string_stream(input_string);
 
+  stringstream raw_string_stream(input_string);
   string token;
   while (getline(raw_string_stream, token, ' ')){
     numbers.push_back(stoi(token));
