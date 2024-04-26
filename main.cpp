@@ -17,6 +17,9 @@ int main(int argc, char* argv[]) {
   vector<string> numbers;
   while (getline(cin, rawInput, ' ')){
     numbers.push_back(rawInput);
+     if (cin.peek() == '\n') {
+        break;
+    }
   }
 
 
