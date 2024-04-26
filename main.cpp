@@ -25,12 +25,20 @@ int main(int argc, char* argv[]) {
     numbers.push_back(stoi(token));
   }
 
+  // Считаем количество чисел (N)
+  size_t n = numbers.size();
+
+  // Выводим полученные данные
+  cout << "Debug: " << debug_flag << endl;
+  cout << "N: " << n << endl;
+
+  cout << "Numbers: ";
   for (size_t i = 0; i < numbers.size(); i++){
-    cout << numbers[i] << endl;
+    cout << numbers[i] << " ";
   }
+  cout << endl;
 
-  cout << "Debug_flag " << debug_flag << endl;
-
+  // Запускаем основную часть программы
   cout << run_threads() << endl;
   return 0;
 }
