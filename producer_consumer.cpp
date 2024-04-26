@@ -1,6 +1,5 @@
 #include <pthread.h>
 #include <iostream>
-#include <vector>
 
 int get_tid() {
   // 1 to 3+N thread ID
@@ -28,7 +27,7 @@ void* consumer_interruptor_routine(void* arg) {
 }
 
 // the declaration of run threads can be changed as you like
-int run_threads(int n, vector<int> numbers, bool debug_flag) {
+int run_threads() {
   // start N threads and wait until they're done
   // return aggregated sum of values
 

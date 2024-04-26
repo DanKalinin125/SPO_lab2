@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
   // Определяем наличие флага -debug
   bool debug_flag = false;
   for (int i = 1; i < argc; i++){
-    if (argv[i] == "-debug") debug_flag = true;
+    if (string(argv[i]) == "-debug") debug_flag = true;
   }
 
   // Считываем числа
