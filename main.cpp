@@ -39,6 +39,6 @@ int main(int argc, char* argv[]) {
   // cout << endl;
 
   // Запускаем основную часть программы
-  cout << run_threads() << endl;
+  cout << run_threads(n, numbers, debug_flag) << endl;
   return 0;
 }

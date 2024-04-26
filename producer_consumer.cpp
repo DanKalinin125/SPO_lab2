@@ -1,5 +1,8 @@
 #include <pthread.h>
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 int get_tid() {
   // 1 to 3+N thread ID
