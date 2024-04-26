@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream> 
 #include "producer_consumer.h"
 #include <vector>
 
@@ -13,15 +14,16 @@ int main(int argc, char* argv[]) {
   }
 
   // Считываем числа
-  string rawInput;
-  vector<string> numbers;
-  while (getline(cin, rawInput, ' ')){
-    if (rawInput == "\n") {
-        break;
-    }
-    numbers.push_back(rawInput);
-  }
+  string input_string;
+  vector<int> numbers;
+  
+  cin >> input_string;
+  stringstream raw_string_stream(input_string);
 
+  string token;
+  while (getline(raw_string_stream, token, ' ')){
+    numbers.push_back(stoi(token));
+  }
 
   for (size_t i = 0; i < numbers.size(); i++){
     cout << numbers[i] << endl;
