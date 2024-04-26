@@ -15,7 +15,8 @@ int main(int argc, char* argv[]) {
   string rawInput;
   getline(cin, rawInput, ' ');
 
-  cout << rawInput;
+  cout << rawInput << endl;
+  cout << debug_flag << endl;
 
   cout << run_threads() << endl;
   return 0;
