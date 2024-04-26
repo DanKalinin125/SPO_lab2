@@ -21,13 +21,17 @@ int main(int argc, char* argv[]) {
 
   // Число потоков consumer (N)
   int n;
+  string n_string;
   cout << "Введите число потоков consumer (N): ";
-  cin >> n;
+  getline(cin, n_string);
+  n = stoi(n_string);
 
   // Максимальное время сна для consumer
   int max_sleep_time;
+  string max_sleep_time_string;
   cout << "Введите максимальное время сна для consumer: ";
-  cin >> max_sleep_time;
+  getline(cin, max_sleep_time_string);
+  n = stoi(max_sleep_time_string);
 
   // Список чисел
   vector<int> numbers;
