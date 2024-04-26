@@ -45,7 +45,6 @@ int main(int argc, char* argv[]) {
     numbers.push_back(stoi(token));
   }
 
-
   // Выводим полученные данные
   // cout << "Debug: " << debug_flag << endl;
   // cout << "N: " << n << endl;
