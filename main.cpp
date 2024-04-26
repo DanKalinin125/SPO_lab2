@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
   string input_string;
   vector<int> numbers;
   
-  cin >> input_string;
+  getline(cin, input_string);
   stringstream raw_string_stream(input_string);
 
   string token;
