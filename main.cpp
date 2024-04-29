@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 // На вход подается
 // 1. Флаг -debug (в argv)
 // 2. Число потоков consumer
@@ -18,7 +17,7 @@ int main(int argc, char* argv[]) {
   for (int i = 1; i < argc; i++){
     if (string(argv[i]) == "-debug") debug_flag = true;
   }
-
+  
   // Число потоков consumer (N)
   int n;
   string n_string;
@@ -57,5 +56,8 @@ int main(int argc, char* argv[]) {
 
   // Запускаем основную часть программы
   cout << run_threads(n, max_sleep_time, numbers, debug_flag) << endl;
+
   return 0;
 }
+
+

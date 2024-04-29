@@ -159,16 +159,6 @@ void* consumer_interruptor_routine(void* arg) {
 
 // Запуск потоков
 int run_threads(int n, int max_sleep_time, vector<int> numbers, bool debug_flag) {
-  // Пока для тестов выводим полученные переменные
-  cout << "Debug: " << debug_flag << endl;
-  cout << "N: " << n << endl;
-  cout << "Max_sleep_time: " << max_sleep_time << endl;
-  cout << "Numbers: ";
-  for (size_t i = 0; i < numbers.size(); i++){
-    cout << numbers[i] << " ";
-  }
-  cout << endl;
-
   // Инициализируем разделяемую переменную
   // и заполняем её значениями по умолчанию
   struct shared_variable shared_variable;
@@ -225,7 +215,12 @@ int run_threads(int n, int max_sleep_time, vector<int> numbers, bool debug_flag)
     }
   }
 
-  cout << "Сумма = " << result << endl;
+  //cout << "Сумма = " << result << endl;
 
-  return 0;
+  delete[] consumer_threads;
+  pthread_mutex_destroy(&shared_variable_mutex);
+  pthread_cond_destroy(&shared_variable_written);
+  pthread_cond_destroy(&shared_variable_read);
+
+  return result;
 }
