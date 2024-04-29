@@ -17,7 +17,13 @@ struct shared_variable {
 
 int get_tid() {
   // 1 to 3+N thread ID
-  return 0;
+  static atomic<int> unique_tid{0};
+  thread_local static int *tid;
+  if (tid == 0) {
+    unique_tid++;
+    tid = new int(unique_tid);
+  }
+  return *tid;
 }
 
 
@@ -31,6 +37,7 @@ struct producer_data{
 // Поток producer
 void* producer_routine(void* arg) {
   (void)arg;
+  printf("Producer (tid) = %d\n", get_tid());
   // read data, loop through each value and update the value, notify consumer,
   // wait for consumer to process
   return nullptr;
@@ -47,6 +54,7 @@ struct consumer_data{
 // Поток consumer
 void* consumer_routine(void* arg) {
   (void)arg;
+  printf("Consumer (tid) = %d\n", get_tid());
   // for every update issued by producer, read the value and add to sum
   // return pointer to result (for particular consumer)
   return nullptr;
@@ -121,6 +129,8 @@ int run_threads(int n, int max_sleep_time, vector<int> numbers, bool debug_flag)
       exit(ERROR_JOIN_THREAD);
     }
   }
+
+  cout << "Все потоки завершены" << endl;
 
   return 0;
 }
