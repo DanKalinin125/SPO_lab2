@@ -16,7 +16,7 @@ struct shared_variable {
   int value;
   // Флаг наличия значения в разделяемой переменной
   bool flag_presence_value;
-}
+};
 
 int get_tid() {
   // 1 to 3+N thread ID
@@ -35,7 +35,7 @@ struct producer_data{
   int* shared_variable;
   int* numbers;
   size_t numbers_size;
-}
+};
 
 // Поток producer
 void* producer_routine(void* arg) {
@@ -52,7 +52,7 @@ struct consumer_data{
   int* shared_variable;
   bool debug_flag;
   int max_sleep_time;
-}
+};
 
 // Поток consumer
 void* consumer_routine(void* arg) {
