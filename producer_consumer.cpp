@@ -1,5 +1,8 @@
 #include <pthread.h>
 #include <iostream>
+#include <atomic>
+#include <thread>
+#include <iostream>
 #include <vector>
 
 #define ERROR_CREATE_THREAD -11
