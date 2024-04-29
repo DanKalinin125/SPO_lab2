@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
   // Максимальное время сна для consumer
   int max_sleep_time;
   string max_sleep_time_string;
-  cout << "Введите максимальное время сна для consumer: ";
+  cout << "Введите максимальное время сна для consumer (мс): ";
   getline(cin, max_sleep_time_string);
   max_sleep_time = stoi(max_sleep_time_string);
 
