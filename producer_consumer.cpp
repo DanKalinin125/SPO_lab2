@@ -1,7 +1,6 @@
 #include <pthread.h>
 #include <atomic>
 #include <iostream>
-#include <queue>
 #include <thread>
 #include <vector>
 
@@ -16,7 +15,8 @@ pthread_cond_t shared_variable_changed = PTHREAD_COND_INITIALIZER;
 
 // Глобальные переменные
 bool flag_finish = false;    // Флаг завершения
-queue<int> shared_variable;  // Разделяемая переменная
+int* shared_variable_buffer; // Разделяемая переменная
+int shared_variable_count = 0;  // Текущая длина разделяемой переменной
 
 // Данные, передаваемые в producer
 struct producer_data {
@@ -61,7 +61,8 @@ void* producer_routine(void* arg) {
   // Записываем данные в разделяемую переменную
   for (size_t i = 0; i < numbers_size; i++) {
     pthread_mutex_lock(&shared_variable_mutex);
-    shared_variable.push(numbers[i]);
+    shared_variable_buffer[shared_variable_count] = numbers[i];
+    shared_variable_count++;
     pthread_cond_signal(&shared_variable_changed);
     pthread_mutex_unlock(&shared_variable_mutex);
   }
@@ -88,17 +89,17 @@ void* consumer_routine(void* arg) {
   int max_sleep_time = consumer_data->max_sleep_time;
 
   // Читаем данные из разделяемой переменной
-  while (flag_finish == false || !shared_variable.empty()) {
+  while (flag_finish == false || shared_variable_count != 0) {
     pthread_mutex_lock(&shared_variable_mutex);
-    while (flag_finish == false && shared_variable.empty()) {
+    while (flag_finish == false && shared_variable_count == 0) {
       pthread_cond_wait(&shared_variable_changed, &shared_variable_mutex);
     }
-    if (shared_variable.empty()) {
+    if (shared_variable_count == 0) {
       pthread_mutex_unlock(&shared_variable_mutex);
       break;
     }
-    int tmp = shared_variable.front();
-    shared_variable.pop();
+    int tmp = shared_variable_buffer[shared_variable_count - 1];
+    shared_variable_count--;
     *thread_sum += tmp;
     if (debug_flag) cout << get_tid() << ", " << *thread_sum << endl;
     pthread_mutex_unlock(&shared_variable_mutex);
@@ -135,6 +136,10 @@ void* consumer_interruptor_routine(void* arg) {
 // Запуск потоков
 int run_threads(int n, int max_sleep_time, vector<int> numbers,
                 bool debug_flag) {
+
+  // Инициализируем разделяемую переменную
+  shared_variable_buffer = new int[numbers.size()];
+
   // Запускаем поток producer
   struct producer_data producer_data;
   producer_data.numbers = &numbers[0];
@@ -212,6 +217,7 @@ int run_threads(int n, int max_sleep_time, vector<int> numbers,
     exit(ERROR_JOIN_THREAD);
   }
 
+  delete[] shared_variable_buffer;
   delete[] consumer_threads;
   pthread_mutex_destroy(&shared_variable_mutex);
   pthread_cond_destroy(&shared_variable_changed);
