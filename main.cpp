@@ -1,7 +1,7 @@
 #include <iostream>
-#include <sstream> 
-#include "producer_consumer.h"
+#include <sstream>
 #include <vector>
+#include "producer_consumer.h"
 
 using namespace std;
 
@@ -11,13 +11,12 @@ using namespace std;
 // 3. Максимальное время сна для consumer
 // 4. Строка чисел через пробел для producer
 int main(int argc, char* argv[]) {
-
   // Определяем наличие флага -debug
   bool debug_flag = false;
-  for (int i = 1; i < argc; i++){
+  for (int i = 1; i < argc; i++) {
     if (string(argv[i]) == "-debug") debug_flag = true;
   }
-  
+
   // Число потоков consumer (N)
   int n;
   string n_string;
@@ -40,7 +39,7 @@ int main(int argc, char* argv[]) {
 
   stringstream raw_string_stream(input_string);
   string token;
-  while (getline(raw_string_stream, token, ' ')){
+  while (getline(raw_string_stream, token, ' ')) {
     numbers.push_back(stoi(token));
   }
 
@@ -59,5 +58,3 @@ int main(int argc, char* argv[]) {
 
   return 0;
 }
-
-
